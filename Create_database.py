@@ -1,9 +1,6 @@
 import pandas as pd
 import sqlite3
 
-# Read the CSV file into a DataFrame
-circuits_df = pd.read_csv('archive/circuits.csv')
-
 # Connect to sql database or create one if table doesn't exist
 conn = sqlite3.connect('Greatest.db')
 
@@ -11,307 +8,236 @@ conn = sqlite3.connect('Greatest.db')
 cur = conn.cursor()
 
 # Read the CSV file into a DataFrame
-constructor_results_df = pd.read_csv('archive/constructor_results.csv')
+circuits_df = pd.read_csv('archive/circuits.csv')
+
+# Create table Circuits
 cur.execute('''
-    CREATE TABLE IF NOT EXISTS Constructor_results (
-   constructorResultsId INTEGER,
-   raceId INTEGER,
-   constructorId INTEGER,
-   points INTEGER,
-   status TEXT
+    CREATE TABLE IF NOT EXISTS Circuits (
+    circuitId INTEGER,
+    circuitRef TEXT,
+    name TEXT,
+    location TEXT,
+    country TEXT,
+    lat REAL,
+    lng REAL,
+    alt REAL,
+    url TEXT
+    )
+''')
+
+
+# Read the CSV file into a DataFrame
+constructor_results_df = pd.read_csv('archive/constructor_results.csv')
+
+# Create table constructor_results
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Constructor results' (
+        constructorResultsId INTEGER,
+        raceId INTEGER,
+        constructorId INTEGER,
+        points INTEGER,
+        status TEXT
     )
 ''')
 
 # Insert Data into the table
 for index, row in constructor_results_df.iterrows():
     cur.execute('''
-        INSERT INTO Constructor_results(constructorResultsId, raceId, constructorId, points, status)
+        INSERT INTO 'Constructor results' (constructorResultsId, raceId, constructorId, points, status)
         VALUES(?, ?, ?, ?, ?)
         ''', (row['constructorResultsId'], row['raceId'], row['constructorId'], row['points'], row['status']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS Circuits (
-#     circuitId INTEGER,
-#     circuitRef TEXT,
-#     name TEXT,
-#     location TEXT,
-#     country TEXT,
-#     lat REAL,
-#     lng REAL,
-#     alt REAL,
-#     url TEXT
-#     )
-# ''')
-#
-# # Insert Data into the table
-# for index, row in circuits_df.iterrows():
-#     cur.execute('''
-#         INSERT INTO Circuits(circuitId, circuitRef, name,location, country, lat, lng, alt, url)
-#         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-#         ''', (row['circuitId'], row['circuitRef'], row['name'], row['location'], row['country'], row['lat'], row['lng'], row['alt'], row['url']))
-#
-# Commit the action
-conn.commit()
 
-# Close the cursor and connection
+# Read the CSV file into a DataFrame
+constructor_standings_df = pd.read_csv('archive/constructor_standings.csv')
+
+# Create table constructor_standings
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Constructor standings' (
+        constructorStandingsId INTEGER,
+        raceId INTEGER,
+        constructorId INTEGER,
+        points INTEGER,
+        position INTEGER,
+        positionText TEXT,
+        wins INTEGER
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in constructor_standings_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Constructor standings' (constructorStandingsId,raceId,constructorId,points,position,positionText,wins)
+        VALUES(?, ?, ?, ?, ?, ?, ?)
+        ''', (row['constructorStandingsId'], row['raceId'], row['constructorId'], row['points'], row['position'],
+              row['positionText'], row['wins']))
+
+# Read the CSV file into a DataFrame
+constructors_df = pd.read_csv('archive/constructors.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS Constructors (
+        constructorId INTEGER,
+        constructorRef TEXT,
+        name TEXT,
+        nationality TEXT,
+        url TEXT
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in constructors_df.iterrows():
+    cur.execute('''
+        INSERT INTO Constructors  (constructorId, constructorRef, name, nationality, url)
+        VALUES(?, ?, ?, ?, ?)
+        ''', (row['constructorId'], row['constructorRef'], row['name'], row['nationality'], row['url']))
+
+# Read the CSV file into a DataFrame
+drivers_df = pd.read_csv('archive/drivers.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS Drivers (
+       driverId INTEGER,
+       driverRef TEXT,
+       number INTEGER,
+       code TEXT,
+       forename TEXT,
+       surname TEXT,
+       dob TEXT,
+       nationality TEXT,
+       url TEXT
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in drivers_df.iterrows():
+    cur.execute('''
+        INSERT INTO Drivers (driverId, driverRef, number, code, forename, surname, dob, nationality, url)
+        VALUES(?, ?, ?, ?, ?, ? , ? ,? , ?)
+        ''', (row['driverId'], row['driverRef'], row['number'], row['code'], row['forename'], row['surname'],
+              row['dob'], row['nationality'], row['url']))
+
+# Read the CSV file into a DataFrame
+lap_times_df = pd.read_csv('archive/lap_times.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Lap Times' (
+      raceId INTEGER,
+      driverId INTEGER,
+      lap INTEGER,
+      position INTEGER,
+      time TEXT,
+      milliseconds INTEGER
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in lap_times_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Lap Times' (raceId,driverId,lap,position,time,milliseconds)
+        VALUES(?, ?, ?, ?, ?, ?)
+        ''', (row['raceId'], row['driverId'], row['lap'], row['position'], row['time'], row['milliseconds']))
+
+# Read the CSV file into a DataFrame
+pit_stops_df = pd.read_csv('archive/pit_stops.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Pit Stops' (
+    raceId INTEGER,
+    driverId INTEGER,
+    stop INTEGER,
+    lap INTEGER,
+    time TEXT,
+    duration TEXT,
+    milliseconds INTEGER
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in pit_stops_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Pit Stops' (raceId, driverId, stop,lap, time, duration, milliseconds)
+        VALUES(?, ?, ?, ?, ?, ?, ?)
+        ''', (row['raceId'], row['driverId'], row['stop'], row['lap'], row['time'],
+              row['duration'], row['milliseconds']))
+
+# Read the CSV file into a DataFrame
+qualifying_df = pd.read_csv('archive/qualifying.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Qualifying' (
+    qualifyId INTEGER,
+    raceId INTEGER,
+    driverId INTEGER,
+    constructorId INTEGER,
+    number INTEGER,
+    position INTEGER,
+    q1 TEXT,
+    q2 TEXT,
+    q3 TEXT
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in qualifying_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Qualifying' (qualifyId, raceId, driverId, constructorId, number,
+         position, q1, q2, q3)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (row['qualifyId'], row['raceId'], row['driverId'], row['constructorId'], row['number'],
+              row['position'], row['q1'], row['q2'], row['q3']))
+
+# Read the CSV file into a DataFrame
+races_df = pd.read_csv('archive/races.csv')
+
+# Create table constructors
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Races' ( 
+    raceId INTEGER,
+    year INTEGER,
+    round INTEGER,
+    circuitId INTEGER,
+    name TEXT,
+    date TEXT,
+    time TEXT,
+    url TEXT,
+    fp1_date TEXT,
+    fp1_time TEXT,
+    fp2_date TEXT,
+    fp2_time TEXT,
+    fp3_date TEXT,
+    fp3_time TEXT,
+    quali_date TEXT,
+    quali_time TEXT,
+    sprint_date TEXT,
+    sprint_time TEXT
+
+    )
+''')
+
+# Insert Data into the table
+for index, row in races_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Races' (raceId,year,round,circuitId,name,date,time,url,
+        fp1_date,fp1_time,fp2_date,fp2_time,fp3_date,fp3_time,
+        quali_date,quali_time,sprint_date,sprint_time)
+
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (row['raceId'], row['year'], row['round'], row['circuitId'], row['name'],
+              row['date'], row['time'], row['url'], row['fp1_date'],row['fp1_time'], row['fp2_date'],
+              row['fp2_time'], row['fp3_date'], row['fp3_time'],
+              row['quali_date'], row['quali_time'], row['sprint_date'], row['sprint_time']))
+
+conn.commit()
 cur.close()
 conn.close()
