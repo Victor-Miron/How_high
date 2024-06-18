@@ -29,7 +29,7 @@ cur.execute('''
 # Read the CSV file into a DataFrame
 constructor_results_df = pd.read_csv('archive/constructor_results.csv')
 
-# Create table constructor_results
+# Create table Constructor_results
 cur.execute('''
     CREATE TABLE IF NOT EXISTS 'Constructor results' (
         constructorResultsId INTEGER,
@@ -67,7 +67,8 @@ cur.execute('''
 # Insert Data into the table
 for index, row in constructor_standings_df.iterrows():
     cur.execute('''
-        INSERT INTO 'Constructor standings' (constructorStandingsId,raceId,constructorId,points,position,positionText,wins)
+        INSERT INTO 'Constructor standings' (constructorStandingsId,raceId,constructorId,
+        points,position,positionText,wins)
         VALUES(?, ?, ?, ?, ?, ?, ?)
         ''', (row['constructorStandingsId'], row['raceId'], row['constructorId'], row['points'], row['position'],
               row['positionText'], row['wins']))
@@ -75,7 +76,7 @@ for index, row in constructor_standings_df.iterrows():
 # Read the CSV file into a DataFrame
 constructors_df = pd.read_csv('archive/constructors.csv')
 
-# Create table constructors
+# Create table Constructors
 cur.execute('''
     CREATE TABLE IF NOT EXISTS Constructors (
         constructorId INTEGER,
@@ -124,7 +125,7 @@ for index, row in drivers_df.iterrows():
 # Read the CSV file into a DataFrame
 lap_times_df = pd.read_csv('archive/lap_times.csv')
 
-# Create table constructors
+# Create table Lap Times
 cur.execute('''
     CREATE TABLE IF NOT EXISTS 'Lap Times' (
       raceId INTEGER,
@@ -147,7 +148,7 @@ for index, row in lap_times_df.iterrows():
 # Read the CSV file into a DataFrame
 pit_stops_df = pd.read_csv('archive/pit_stops.csv')
 
-# Create table constructors
+# Create table Pit Stops
 cur.execute('''
     CREATE TABLE IF NOT EXISTS 'Pit Stops' (
     raceId INTEGER,
@@ -172,7 +173,7 @@ for index, row in pit_stops_df.iterrows():
 # Read the CSV file into a DataFrame
 qualifying_df = pd.read_csv('archive/qualifying.csv')
 
-# Create table constructors
+# Create table Qualifying
 cur.execute('''
     CREATE TABLE IF NOT EXISTS 'Qualifying' (
     qualifyId INTEGER,
@@ -200,7 +201,7 @@ for index, row in qualifying_df.iterrows():
 # Read the CSV file into a DataFrame
 races_df = pd.read_csv('archive/races.csv')
 
-# Create table constructors
+# Create table Races
 cur.execute('''
     CREATE TABLE IF NOT EXISTS 'Races' ( 
     raceId INTEGER,
@@ -234,9 +235,127 @@ for index, row in races_df.iterrows():
 
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (row['raceId'], row['year'], row['round'], row['circuitId'], row['name'],
-              row['date'], row['time'], row['url'], row['fp1_date'],row['fp1_time'], row['fp2_date'],
+              row['date'], row['time'], row['url'], row['fp1_date'], row['fp1_time'], row['fp2_date'],
               row['fp2_time'], row['fp3_date'], row['fp3_time'],
               row['quali_date'], row['quali_time'], row['sprint_date'], row['sprint_time']))
+
+# Read the CSV file into a DataFrame
+results_df = pd.read_csv('archive/results.csv')
+
+# Create table Results
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Results' ( 
+    resultId INTEGER,
+    raceId INTEGER,
+    driverId INTEGER,
+    constructorId INTEGER,
+    number INTEGER,
+    grid INTEGER,
+    position INTEGER,
+    positionText TEXT,
+    positionOrder INTEGER,
+    points INTEGER,
+    laps INTEGER,
+    time TEXT,
+    milliseconds INTEGER,
+    fastestLap INTEGER,
+    rank INTEGER,
+    fastestLapTime TEXT,
+    fastestLapSpeed TEXT,
+    statusId INTEGER
+
+
+    )
+''')
+
+# Insert Data into the table
+for index, row in results_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Results' (resultId, raceId, driverId, constructorId, number,
+        grid, position, positionText, positionOrder, points, laps, time, milliseconds,
+        fastestLap, rank, fastestLapTime, fastestLapSpeed, statusId
+)
+
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (row['resultId'], row['raceId'], row['driverId'], row['constructorId'], row['number'],
+              row['grid'], row['position'], row['positionText'], row['positionOrder'], row['points'],
+              row['laps'], row['time'], row['milliseconds'], row['fastestLap'],
+              row['rank'], row['fastestLapTime'], row['fastestLapSpeed'], row['statusId']))
+
+# Read the CSV file into a DataFrame
+seasons_df = pd.read_csv('archive/seasons.csv')
+
+# Create table Seasons
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Seasons' (
+    year Integer,
+    url TEXT
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in seasons_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Seasons' (year, url)
+        VALUES(?, ?)
+        ''', (row['year'], row['url']))
+
+# Read the CSV file into a DataFrame
+seasons_df = pd.read_csv('archive/seasons.csv')
+
+# Create table Sprint Results
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Sprint Results' ( 
+        resultId INTEGER,
+        raceId INTEGER,
+        driverId INTEGER,
+        constructorId INTEGER,
+        number INTEGER,
+        grid INTEGER,
+        position INTEGER,
+        positionText TEXT,
+        positionOrder INTEGER,
+        points INTEGER,
+        laps INTEGER,
+        time INTEGER,
+        milliseconds INTEGER,
+        fastestLap INTEGER,
+        fastestLapTime TEXT,
+        statusId INTEGER
+    )
+''')
+
+# Insert Data into the table
+for index, row in results_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Results' (resultId, raceId, driverId, constructorId, number, grid, position,
+        positionText, positionOrder, points, laps, time, milliseconds, fastestLap, fastestLapTime, statusId
+)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (row['resultId'], row['raceId'], row['driverId'], row['constructorId'],
+              row['number'], row['grid'], row['position'], row['positionText'], row['positionOrder'],
+              row['points'], row['laps'], row['time'], row['milliseconds'], row['fastestLap'],
+              row['fastestLapTime'], row['statusId']))
+
+# Read the CSV file into a DataFrame
+status_df = pd.read_csv('archive/status.csv')
+
+# Create table Status
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS 'Status' (
+    statusId INTEGER,
+    status TEXT
+    )
+''')
+
+
+# Insert Data into the table
+for index, row in status_df.iterrows():
+    cur.execute('''
+        INSERT INTO 'Status' (statusId, status)
+        VALUES(?, ?)
+        ''', (row['statusId'], row['status']))
 
 conn.commit()
 cur.close()
