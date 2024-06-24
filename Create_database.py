@@ -203,7 +203,7 @@ races_df = pd.read_csv('archive/races.csv')
 
 # Create table Races
 cur.execute('''
-    CREATE TABLE IF NOT EXISTS 'Races' ( 
+    CREATE TABLE IF NOT EXISTS 'Races' (
     raceId INTEGER,
     year INTEGER,
     round INTEGER,
@@ -244,7 +244,7 @@ results_df = pd.read_csv('archive/results.csv')
 
 # Create table Results
 cur.execute('''
-    CREATE TABLE IF NOT EXISTS 'Results' ( 
+    CREATE TABLE IF NOT EXISTS 'Results' (
     resultId INTEGER,
     raceId INTEGER,
     driverId INTEGER,
@@ -306,7 +306,7 @@ seasons_df = pd.read_csv('archive/seasons.csv')
 
 # Create table Sprint Results
 cur.execute('''
-    CREATE TABLE IF NOT EXISTS 'Sprint Results' ( 
+    CREATE TABLE IF NOT EXISTS 'Sprint Results' (
         resultId INTEGER,
         raceId INTEGER,
         driverId INTEGER,
@@ -356,6 +356,30 @@ for index, row in status_df.iterrows():
         INSERT INTO 'Status' (statusId, status)
         VALUES(?, ?)
         ''', (row['statusId'], row['status']))
+
+# # Delete unwanted tables
+# cur.execute('''
+# DROP TABLE IF EXISTS Constructor_results ''')
+
+# Select columns from different tables and create the tabla Constructor Data
+
+cur.execute(''' 
+    CREATE TABLE IF NOT EXISTS "Constructor Data" AS
+        SELECT "Constructors".name, "Constructors".nationality, 
+        "Constructor standings".points, "Constructor Standings".position, "Constructor Standings".wins,
+        "Constructor results".points,
+        "Results".number, "Results".grid, "Results".position,
+        "Circuits".name, "Circuits".location, "Circuits".country,
+        "Races".name, "Races".date,
+        "Seasons".year
+        FROM Constructors
+        INNER JOIN "Constructor Standings" ON "Constructor Standings".constructorID=Constructors.constructorID
+        INNER JOIN "Constructor results" ON "Constructor results".constructorID=Constructors.constructorID
+        INNER JOIN "Results" ON Results.constructorID=Constructors.constructorID
+        INNER JOIN "Seasons" ON Seasons.year=Races.year
+        INNER JOIN "Circuits" ON Circuits.circuitID=Races.circuitID
+        INNER JOIN "Races" ON Races.raceID=Results.raceID;
+        ''')
 
 conn.commit()
 cur.close()
