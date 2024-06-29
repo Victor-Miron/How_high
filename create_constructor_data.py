@@ -11,10 +11,12 @@ cur.execute('''
     CREATE TABLE IF NOT EXISTS "Constructor Data" AS
         SELECT Constructors.name, Constructors.nationality, 
                "Constructor standings".points, "Constructor standings".position, 
-               "Constructor standings".wins, "Constructor results".points,
+               "Constructor standings".wins, 
+               "Constructor results".points,
                Results.number, Results.grid, Results.position,
                Circuits.name AS circuit_name, Circuits.location, Circuits.country,
-               Races.name AS race_name, Races.date, Seasons.year
+               Races.name AS race_name, Races.date, 
+               Seasons.year
         FROM Constructors
         INNER JOIN "Constructor standings" ON "Constructor standings".constructorId = Constructors.constructorId
         INNER JOIN "Constructor results" ON "Constructor results".constructorId = Constructors.constructorId
