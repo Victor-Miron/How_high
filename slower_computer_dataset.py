@@ -14,15 +14,16 @@ try:
     cur.execute('''
         CREATE TABLE IF NOT EXISTS "Constructor Data" (
             constructorId INTEGER,
-            raceId INTEGER
+            raceId INTEGER,
+            constructorStandingsId INTEGER
         )
     ''')
 
     # Step 2: Populate the table with the primary keys
     cur.execute('''
-        INSERT INTO "Constructor Data" (constructorId, raceId)
-        SELECT DISTINCT constructorId, raceId
-        FROM Results
+        INSERT INTO "Constructor Data" (constructorId, raceId, constructorStandingsId)
+        SELECT DISTINCT constructorId, raceId, constructorStandingsId
+        FROM "Constructor Standings"
     ''')
 
     # Step 3: Add columns from Constructors
@@ -30,8 +31,10 @@ try:
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN nationality TEXT')
     cur.execute('''
         UPDATE "Constructor Data"
-        SET name = (SELECT name FROM Constructors WHERE Constructors.constructorId = "Constructor Data".constructorId),
-            nationality = (SELECT nationality FROM Constructors WHERE Constructors.constructorId = "Constructor Data".constructorId)
+        SET name = (SELECT name FROM Constructors 
+                WHERE Constructors.constructorId = "Constructor Data".constructorId),
+            nationality = (SELECT nationality FROM Constructors 
+                WHERE Constructors.constructorId = "Constructor Data".constructorId)
     ''')
 
     # Step 4: Add columns from TempConstructorStandings
@@ -40,16 +43,20 @@ try:
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN wins INTEGER')
     cur.execute('''
         UPDATE "Constructor Data"
-        SET standings_points = (SELECT points FROM "Constructor standings" WHERE "Constructor standings".constructorId = "Constructor Data".constructorId),
-            standings_position = (SELECT position FROM "Constructor standings" WHERE "Constructor standings".constructorId = "Constructor Data".constructorId),
-            wins = (SELECT wins FROM "Constructor standings" WHERE "Constructor standings".constructorId = "Constructor Data".constructorId)
+        SET standings_points = (SELECT points FROM "Constructor standings" 
+                WHERE "Constructor standings".constructorStandingsId = "Constructor Data".constructorStandingsId),
+            standings_position = (SELECT position FROM "Constructor standings" 
+                WHERE "Constructor standings".raceId = "Constructor Data".raceId),
+            wins = (SELECT wins FROM "Constructor standings" 
+                WHERE "Constructor standings".raceId = "Constructor Data".raceId)
     ''')
 
     # Step 5: Add columns from TempConstructorResults
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN results_points INTEGER')
     cur.execute('''
         UPDATE "Constructor Data"
-        SET results_points = (SELECT points FROM "Constructor results" WHERE "Constructor results".constructorId = "Constructor Data".constructorId)
+        SET results_points = (SELECT points FROM "Constructor results" 
+            WHERE "Constructor results".raceId = "Constructor Data".raceId)
     ''')
 
     # Step 6: Add columns from Results
@@ -58,9 +65,12 @@ try:
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN result_position INTEGER')
     cur.execute('''
         UPDATE "Constructor Data"
-        SET result_number = (SELECT number FROM Results WHERE Results.constructorId = "Constructor Data".constructorId AND Results.raceId = "Constructor Data".raceId),
-            grid = (SELECT grid FROM Results WHERE Results.constructorId = "Constructor Data".constructorId AND Results.raceId = "Constructor Data".raceId),
-            result_position = (SELECT position FROM Results WHERE Results.constructorId = "Constructor Data".constructorId AND Results.raceId = "Constructor Data".raceId)
+        SET result_number = (SELECT number FROM Results 
+                WHERE Results.raceId = "Constructor Data".raceId),
+            grid = (SELECT grid FROM Results 
+                WHERE Results.raceId = "Constructor Data".raceId),
+            result_position = (SELECT position FROM Results 
+                WHERE Results.raceId = "Constructor Data".raceId)
     ''')
 
     # Step 7: Add columns from Circuits
@@ -69,9 +79,15 @@ try:
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN country TEXT')
     cur.execute('''
         UPDATE "Constructor Data"
-        SET circuit_name = (SELECT name FROM Circuits WHERE Circuits.circuitId = (SELECT circuitId FROM Races WHERE Races.raceId = "Constructor Data".raceId)),
-            location = (SELECT location FROM Circuits WHERE Circuits.circuitId = (SELECT circuitId FROM Races WHERE Races.raceId = "Constructor Data".raceId)),
-            country = (SELECT country FROM Circuits WHERE Circuits.circuitId = (SELECT circuitId FROM Races WHERE Races.raceId = "Constructor Data".raceId))
+        SET circuit_name = (SELECT name FROM Circuits 
+                WHERE Circuits.circuitId = (SELECT circuitId FROM Races 
+                    WHERE Races.raceId = "Constructor Data".raceId)),
+            location = (SELECT location FROM Circuits 
+                WHERE Circuits.circuitId = (SELECT circuitId FROM Races 
+                    WHERE Races.raceId = "Constructor Data".raceId)),
+            country = (SELECT country FROM Circuits 
+                WHERE Circuits.circuitId = (SELECT circuitId FROM Races 
+                    WHERE Races.raceId = "Constructor Data".raceId))
     ''')
 
     # Step 8: Add columns from Races
@@ -89,7 +105,6 @@ try:
     UPDATE "Constructor Data"
     SET year = (SELECT year FROM Races WHERE Races.raceId = "Constructor Data".raceId)
 ''')
-
 
     # Commit the transaction
     conn.commit()
