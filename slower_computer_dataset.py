@@ -56,7 +56,7 @@ try:
     cur.execute('''
         UPDATE "Constructor Data"
         SET results_points = (SELECT points FROM "Constructor results" 
-            WHERE "Constructor results".raceId = "Constructor Data".raceId)
+            WHERE "Constructor results".constructorId = "Constructor Data".constructorId)
     ''')
 
     # Step 6: Add columns from Results
@@ -69,8 +69,8 @@ try:
                 WHERE Results.raceId = "Constructor Data".raceId),
             grid = (SELECT grid FROM Results 
                 WHERE Results.raceId = "Constructor Data".raceId),
-            result_position = (SELECT position FROM Results 
-                WHERE Results.raceId = "Constructor Data".raceId)
+            result_position = (SELECT position FROM "Constructor Standings"
+                WHERE "Constructor Standings".raceId = "Constructor Data".raceId)
     ''')
 
     # Step 7: Add columns from Circuits
