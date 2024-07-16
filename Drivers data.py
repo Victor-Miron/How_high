@@ -40,17 +40,26 @@ try:
                 WHERE Drivers.driverId = "Drivers Data".driverId)
     ''')
 
-    # Step 4: Add columns from TempRaces
+    # Step 4: Add columns from TempResults
     cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN Year INTEGER')
-    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN "Circuit Name" INTEGER')
-    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN Position INTEGER')
+    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN "Circuit Name" TEXT')
+    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN Points INTEGER')
+    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN Time TEXT')
+    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN Rank INTEGER')
+    cur.execute('ALTER TABLE "Drivers Data" ADD COLUMN FastestLapTime TEXT')
     cur.execute('''
         UPDATE "Drivers Data"
         SET Year = (SELECT year FROM "Races" 
                 WHERE Races.raceId = "Drivers Data".raceId),
-            "Circuit name" = (SELECT name FROM "Races" 
-                WHERE Races.raceId = "Drivers Data".raceId),
-            Position = (SELECT position FROM Results 
+            "Circuit Name" = (SELECT name FROM "Races" 
+                WHERE Races.raceId = "Drivers Data".raceId), 
+            Points = (SELECT points FROM Results 
+                WHERE Results.resultId = "Drivers Data".resultId),
+            Time = (SELECT time FROM Results 
+                WHERE Results.resultId = "Drivers Data".resultId),
+            Rank= (SELECT rank FROM Results 
+                WHERE Results.resultId = "Drivers Data".resultId),
+            FastestLapTime = (SELECT fastestLapTime FROM Results 
                 WHERE Results.resultId = "Drivers Data".resultId)
     ''')
 

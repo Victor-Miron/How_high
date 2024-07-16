@@ -174,7 +174,7 @@ try:
     results_df = pd.read_csv('archive/results.csv')
     # Select only the columns needed
     results_df = results_df[['resultId', 'raceId', 'driverId', 'constructorId',
-                             'number', 'grid', 'position']]
+                             'number', 'points', 'time', 'rank', 'fastestLapTime']]
     # Create table Results
     cur.execute('''
         CREATE TABLE IF NOT EXISTS 'Results' (
@@ -183,8 +183,10 @@ try:
         driverId INTEGER,
         constructorId INTEGER,
         number INTEGER,
-        grid INTEGER,
-        position INTEGER
+        points INTEGER,
+        time TEXT,
+        rank INTEGER,
+        fastestLapTime TEXT
         )
     ''')
 
@@ -192,8 +194,8 @@ try:
 
     cur.executemany('''
         INSERT INTO 'Results' (resultId, raceId, driverId, constructorId, 
-        number, grid, position)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        number, points, time, rank, fastestLapTime)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', results_df)
 
     seasons_df = pd.read_csv('archive/seasons.csv')

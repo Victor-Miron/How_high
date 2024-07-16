@@ -61,13 +61,10 @@ try:
 
     # Step 6: Add columns from Results
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN result_number INTEGER')
-    cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN grid INTEGER')
     cur.execute('ALTER TABLE "Constructor Data" ADD COLUMN result_position INTEGER')
     cur.execute('''
         UPDATE "Constructor Data"
         SET result_number = (SELECT number FROM Results 
-                WHERE Results.raceId = "Constructor Data".raceId),
-            grid = (SELECT grid FROM Results 
                 WHERE Results.raceId = "Constructor Data".raceId),
             result_position = (SELECT position FROM "Constructor Standings"
                 WHERE "Constructor Standings".raceId = "Constructor Data".raceId)
