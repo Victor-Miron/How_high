@@ -11,7 +11,7 @@ To set up this project, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone <repository_url>
+   git clone git@github.com:Victor-Miron/How_high.git
    ```
 
 2. Navigate to the project directory:
