@@ -37,7 +37,8 @@ nationalities = """SELECT
 
 # Drivers Data
 # calculating top 3 with the most points in their career
-top_three = """SELECT forename, surname, sum(points) AS "Total Points", (max(year) - min(year))  As "Duration years" FROM "Drivers Data"
+top_three = """SELECT forename, surname, sum(points) AS "Total Points", (max(year) - min(year))  As "Duration years" 
+    FROM Drivers_Data
     GROUP by forename, surname
     ORDER by "Total Points" DESC
     Limit 3;"""
@@ -50,7 +51,7 @@ top_three = """SELECT forename, surname, sum(points) AS "Total Points", (max(yea
 # """)
 
 # comparing first 3 drivers how many points had in their career every year
-points_comparison = """SELECT forename, surname, sum(points) AS "Total Points", year FROM "Drivers Data"
+points_comparison = """SELECT forename, surname, sum(points) AS "Total Points", year FROM Drivers_Data
     WHERE (forename = "Lewis" AND surname= "Hamilton") or (forename = "Max" AND surname = "Verstappen")
     or (forename = "Sebastian" AND surname= "Vettel")
     GROUP by forename, surname, year
@@ -61,14 +62,15 @@ points_comparison_data = pd.read_sql_query(points_comparison, conn)
 # finding all nationalities of the drivers along the years
 driver_nationalities = """SELECT Nationality, 
     COUNT(DISTINCT forename || ' ' || surname) AS number_of_drivers
-    FROM "Drivers Data"
+    FROM Drivers_Data
     GROUP BY Nationality
     ORDER BY number_of_drivers DESC;"""
 
 driver_nationalities_data = pd.read_sql_query(driver_nationalities, conn)
 
 # finding the most winning drivers at every circuit
-circuit_winners = """SELECT (forename || ' ' || surname) AS Name, sum(rank) AS "Total Wins" , "Circuit Name" FROM "Drivers Data"
+circuit_winners = """SELECT (forename || ' ' || surname) AS Name, sum(rank) AS "Total Wins" , "Circuit Name" 
+    FROM Drivers_Data
     WHERE rank=1
     GROUP by Name, "Circuit Name"
     ORDER by "Total Wins" DESC;"""

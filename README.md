@@ -3,7 +3,7 @@
 
 ## Project Description
 
-This project analyzes and processes datasets related to computer performance, including drivers and constructor data.
+This project analyzes and processes datasets about drivers and constructor teams in F1!
 
 ## Installation Instructions
 
