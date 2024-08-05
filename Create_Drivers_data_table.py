@@ -70,7 +70,7 @@ try:
     conn.commit()
 except Exception as e:
     conn.rollback()
-    print(f"Transaction failed: {e}")
+    print("Transaction already exists. Check database in 'DB Browser for SQLite.'\n", {e})
 finally:
     cur.close()
     conn.close()

@@ -26,16 +26,19 @@ try:
         country TEXT
         )
     ''')
+
     # Convert DataFrame to list of tuples
     circuits_df = [tuple(row) for row in circuits_df.to_numpy()]
-    # Insert Data into the table
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO Circuits (circuitId, circuitRef, name, location, country)
         VALUES (?, ?, ?, ?, ?)
     ''', circuits_df)
 
+    # Read the CSV file into a DataFrame
     constructor_results_df = pd.read_csv('archive/constructor_results.csv')
+
     # Select only the columns needed
     constructor_results_df = constructor_results_df[['constructorResultsId', 'raceId', 'constructorId', 'points']]
 
@@ -52,6 +55,7 @@ try:
     # Convert DataFrame to list of tuples
     constructor_results_df = [tuple(row) for row in constructor_results_df.to_numpy()]
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Constructor results' (constructorResultsId, raceId, constructorId, points)
         VALUES (?, ?, ?, ?)
@@ -77,15 +81,19 @@ try:
     # Convert DataFrame to list of tuples
     constructor_standings_df = [tuple(row) for row in constructor_standings_df.to_numpy()]
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Constructor standings' (constructorStandingsId, raceId, constructorId, points,
         position, wins)
         VALUES (?, ?, ?, ?, ?, ?)
     ''', constructor_standings_df)
 
+    # Read the CSV file into a DataFrame
     constructors_df = pd.read_csv('archive/constructors.csv')
+
     # Select only the columns needed
     constructors_df = constructors_df[['constructorId', 'constructorRef', 'name', 'nationality']]
+
     # Create table Constructors
     cur.execute('''
         CREATE TABLE IF NOT EXISTS Constructors (
@@ -95,17 +103,22 @@ try:
             nationality TEXT
         )
     ''')
+
     # Convert DataFrame to list of tuples
     constructors_df = [tuple(row) for row in constructors_df.to_numpy()]
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO Constructors (constructorId, constructorRef, name, nationality)
         VALUES (?, ?, ?, ?)
     ''', constructors_df)
 
+    # Read the CSV file into a DataFrame
     drivers_df = pd.read_csv('archive/drivers.csv')
+
     # Select only the columns needed
     drivers_df = drivers_df[['driverId', 'driverRef', 'number', 'code', 'forename', 'surname', 'dob', 'nationality']]
+
     # Create table Drivers
     cur.execute('''
         CREATE TABLE IF NOT EXISTS Drivers (
@@ -119,17 +132,22 @@ try:
            nationality TEXT
         )
     ''')
+
     # Convert DataFrame to list of tuples
     drivers_df = [tuple(row) for row in drivers_df.to_numpy()]
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO Drivers (driverId, driverRef, number, code, forename, surname, dob, nationality)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''', drivers_df)
 
+    # Read the CSV file into a DataFrame
     pit_stops_df = pd.read_csv('archive/pit_stops.csv')
+
     # Select only the columns needed
     pit_stops_df = pit_stops_df[['raceId', 'driverId', 'stop', 'lap', 'time', 'duration', 'milliseconds']]
+
     # Create table Pit Stops
     cur.execute('''
         CREATE TABLE IF NOT EXISTS 'Pit Stops' (
@@ -145,14 +163,19 @@ try:
 
     # Convert DataFrame to list of tuples
     pit_stops_df = [tuple(row) for row in pit_stops_df.to_numpy()]
+
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Pit Stops' (raceId, driverId, stop, lap, time, duration, milliseconds)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ''', pit_stops_df)
 
+    # Read the CSV file into a DataFrame
     races_df = pd.read_csv('archive/races.csv')
+
     # Select only the columns needed
     races_df = races_df[['raceId', 'year', 'round', 'circuitId', 'name', 'date']]
+
     # Create table Races
     cur.execute('''
         CREATE TABLE IF NOT EXISTS 'Races' (
@@ -165,16 +188,22 @@ try:
         )
     ''')
 
+    # Convert DataFrame to list of tuples
     races_df = [tuple(row) for row in races_df.to_numpy()]
+
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Races' (raceId, year, round, circuitId, name, date)
         VALUES (?, ?, ?, ?, ?, ?)
     ''', races_df)
 
+    # Read the CSV file into a DataFrame
     results_df = pd.read_csv('archive/results.csv')
+
     # Select only the columns needed
     results_df = results_df[['resultId', 'raceId', 'driverId', 'constructorId',
                              'number', 'points', 'time', 'rank', 'fastestLapTime']]
+
     # Create table Results
     cur.execute('''
         CREATE TABLE IF NOT EXISTS 'Results' (
@@ -190,16 +219,20 @@ try:
         )
     ''')
 
+    # Convert DataFrame to list of tuples
     results_df = [tuple(row) for row in results_df.to_numpy()]
 
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Results' (resultId, raceId, driverId, constructorId, 
         number, points, time, rank, fastestLapTime)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', results_df)
 
+    # Read the CSV file into a DataFrame
     seasons_df = pd.read_csv('archive/seasons.csv')
     seasons_df = seasons_df[['year']]
+
     # Create table Seasons
     cur.execute('''
         CREATE TABLE IF NOT EXISTS 'Seasons' (
@@ -207,7 +240,10 @@ try:
         )
     ''')
 
+    # Convert DataFrame to list of tuples
     seasons_df = [tuple(row) for row in seasons_df.to_numpy()]
+
+    # Insert Data into the table
     cur.executemany('''
         INSERT INTO 'Seasons' (year)
         VALUES (?)

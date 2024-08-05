@@ -88,8 +88,8 @@ To visualize the clean data, use **DB Browser for SQLite**:
 3. **Explore the Data:**
    - Use the built-in tools to explore tables, run queries, and visualize the clean data.
    - The clean data will be in two tables:
-      + Constructor_Data,
-      + Drivers_Data
+      + Constructor Data,
+      + Drivers Data
 
 ## Directory Structure
 
