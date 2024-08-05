@@ -12,4 +12,4 @@ df = pd.read_sql_query("SELECT * FROM 'Constructor Data'", conn)
 conn.close()
 
 # Save data to a CSV file
-df.to_csv('Constructor_data.csv', index=False)
+df.to_csv('Constructor_data_update.csv', index=False)
