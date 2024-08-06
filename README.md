@@ -41,20 +41,37 @@ To use the scripts in this project, follow these steps:
    ```
 
 2. **Create the drivers data table:**
+   **Method1 (A more classical way that I prefer)**
    - Use this script to create a table for storing driver-related data. 
    - Also, this script cleans the drivers data table.
-   - Please be patient.It will take up to 1 minute to create the table due to sql raw code.
+   - Please be patient.It will take up to 1 minute to create the table due to sql rawer code.
    
    ```sh
    python Create_Drivers_data_table.py
    ```
+   **Method2**
+   - Use this script to create a table for storing driver-related data.
+   - Also, this script cleans the drivers data table.
+   - Faster than first method too.
 
+    ```sh
+   python Drivers_Data_Using_Join_method.py
+   ```
+   
 3. **Create the constructor data table:**
+   **Method1 (A more classical way that I prefer)**
    - Use this script to create a table for storing constructor-related data.
    - Also, this script cleans the constructor data table.
-   - Please be patient.It will take up to 1 minute to create the table due to sql raw code.
+   - Please be patient.It will take up to 1 minute to create the table due to sql rawer code.
    ```sh
    python Create_Constructor_data_table.py
+   ```
+   **Method2**
+   - Use this script to create a table for storing constructor-related data.
+   - Also, this script cleans the Constructor data table.
+   - Faster than first method too.
+   ```sh
+   python Constructor_Data_Using_Join_Method.py
    ```
 
 4. **Convert drivers data to SQL:**
@@ -103,7 +120,7 @@ To visualize the clean data, use **DB Browser for SQLite**:
 
 - Implement advanced analytics for driver and constructor performance predictions.
 - Integrate additional data sources for enriched analysis.
-- Develop a user-friendly web interface for data interaction.
+- Develop a user-friendly web interface for data interaction through Tableau.
 
 ## Contributors
 
