@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the SQLite database (or create it if it doesn't exist)
-conn = sqlite3.connect('Greatest.db')
+conn = sqlite3.connect('../Greatest.db')
 
 # Create a cursor object to execute SQL commands
 cur = conn.cursor()

@@ -37,7 +37,7 @@ To use the scripts in this project, follow these steps:
 1. **Create the database:**
    - This script initializes the database structure required for storing F1 data.
    ```sh
-   python Create_database.py
+   python Raw_Database.py
    ```
 
 2. **Create the drivers data table:**
