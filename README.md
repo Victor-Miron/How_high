@@ -5,94 +5,70 @@
 
 The **How High Project** focuses on analyzing and processing datasets related to F1 drivers and constructor teams. The project aims to provide insights into the performance metrics of F1 entities and to visualize the data using tools like Tableau.
 
+## Prerequisites
+
+- Python 3.10 or later
+- Virtual Environment (optional but recommended)
+- Visual Studio Code (VS Code) or any other preferred IDE with Jupyter Notebook support
+
 ## Installation Instructions
 
 To set up this project, follow these steps:
 
-1. **Clone the repository:**
+1. **Clone the Repository:**
+
+   Open your IDE terminal and run:
+
    ```sh
    git clone git@github.com:Victor-Miron/How_high.git
    ```
 
-2. **Navigate to the project directory:**
+2. **Navigate to the Project Directory:**
+
    ```sh
    cd How_high
    ```
 
-3. **Create and activate a virtual environment:**
+3. **Create and Activate a Virtual Environment:**
+
    ```sh
    python -m venv myvenv
    source myvenv/bin/activate   # On Windows, use `myvenv\Scripts\activate`
    ```
 
-4. **Install the required dependencies:**
+4. **Install the Required Dependencies:**
+
    ```sh
    pip install -r requirements.txt
    ```
 
+5. **Install Jupyter Notebook (if not already installed):**
+
+   ```sh
+   pip install notebook
+   ```
+
 ## Usage
 
-To use the scripts in this project, follow these steps:
+### Running the Project
 
-1. **Create the database:**
-   - This script initializes the database structure required for storing F1 data.
-   ```sh
-   python Raw_Database.py
-   ```
+1. **Open the Project in Your IDE:**
 
-2. **Create the drivers data table:**
-   **Method1 (A more classical way that I prefer)**
-   - Use this script to create a table for storing driver-related data. 
-   - Also, this script cleans the drivers data table.
-   - Please be patient.It will take up to 1 minute to create the table due to sql rawer code.
-   
-   ```sh
-   python Create_Drivers_data_table.py
-   ```
-   **Method2**
-   - Use this script to create a table for storing driver-related data.
-   - Also, this script cleans the drivers data table.
-   - Faster than first method too.
+   - Open Visual Studio Code (VS Code) or your preferred IDE.
+   - Go to `File` > `Open Folder` and select the project directory.
 
-    ```sh
-   python Drivers_Data_Using_Join_method.py
-   ```
-   
-3. **Create the constructor data table:**
-   **Method1 (A more classical way that I prefer)**
-   - Use this script to create a table for storing constructor-related data.
-   - Also, this script cleans the constructor data table.
-   - Please be patient.It will take up to 1 minute to create the table due to sql rawer code.
-   ```sh
-   python Create_Constructor_data_table.py
-   ```
-   **Method2**
-   - Use this script to create a table for storing constructor-related data.
-   - Also, this script cleans the Constructor data table.
-   - Faster than first method too.
-   ```sh
-   python Constructor_Data_Using_Join_Method.py
-   ```
+2. **Run the Main Script:**
 
-4. **Convert drivers data to SQL:**
-   - This script transforms and loads driver data into the SQL database for further analysis.
-   ```sh
-   python Convert_Drivers_data_to_sql.py
-   ```
+   - Open the terminal within your IDE (`View` > `Terminal` in VS Code).
+   - Run the main script:
 
-5. **Convert constructor data to SQL:**
-   - This script transforms and loads constructor data into the SQL database.
-   ```sh
-   python Convert_Constructor_data_to_sql.py
-   ```
+     ```sh
+     python Greatest.py
+     ```
 
-6. **Data Handling Demo:**
-   - Demonstrates data manipulation techniques in Python.
-   ```sh
-   python Data_handling_demo_in_python.py
-   ```
+   This will execute all necessary steps to process the data and create the database `Greatest.db`.
 
-## Visualizing the Clean Data
+### Visualizing the Clean Data
 
 To visualize the clean data, use **DB Browser for SQLite**:
 
@@ -105,16 +81,56 @@ To visualize the clean data, use **DB Browser for SQLite**:
 3. **Explore the Data:**
    - Use the built-in tools to explore tables, run queries, and visualize the clean data.
    - The clean data will be in two tables:
-      + Constructor Data,
-      + Drivers Data
+     - Constructor Data
+     - Drivers Data
+
+### Running the Data Handling Demo
+
+1. **Launch Jupyter Notebook from Your IDE:**
+
+   - In VS Code, use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and select `Python: Create New Blank Notebook`.
+   - Open the terminal within your IDE (`View` > `Terminal` in VS Code).
+   - Run Jupyter Notebook:
+
+     ```sh
+     jupyter notebook
+     ```
+
+2. **Open the Notebook:**
+
+   - In the Jupyter Notebook interface, navigate to the project directory and open `Data_handling_demo_in_python.ipynb`.
+
+3. **Run the Notebook:**
+
+   - Execute the cells in the notebook to run the data handling demo.
+
+## Script Descriptions
+
+For reviewers who want more information about the code, each Python script in this project serves a specific purpose. Below is the order and description of each script:
+
+1. **Raw_Database.py**: Initializes the database structure required for storing F1 data.
+
+2. **Create_Drivers_data_table.py**: Creates and cleans the drivers data table. This is one method for handling driver data.
+
+3. **Drivers_Data_Using_Join_method.py**: An alternative, faster method for creating and cleaning the drivers data table using joins.
+
+4. **Create_Constructor_data_table.py**: Creates and cleans the constructor data table. This is one method for handling constructor data.
+
+5. **Constructors_Data_Using_Join_method.py**: An alternative, faster method for creating and cleaning the constructor data table using joins.
+
+6. **Convert_Drivers_data_to_sql.py**: Transforms and loads driver data into the SQL database for further analysis.
+
+7. **Convert_Constructor_data_to_sql.py**: Transforms and loads constructor data into the SQL database for further analysis.
+
+8. **Data_handling_demo_in_python.py**: Demonstrates data manipulation techniques in Python. Also available as a Jupyter Notebook for interactive exploration.
 
 ## Directory Structure
 
-- **`archive/`:** Contains archived datasets and backup files.
-- **`myvenv/`:** The virtual environment directory for managing project dependencies.
-- **`__pycache__/`:** Compiled Python files for faster execution.
-- **`.git/`:** Git version control directory for tracking changes.
-- **`.idea/`:** Configuration files for IDE support.
+- **`archive/`**: Contains archived datasets and backup files.
+- **`myvenv/`**: The virtual environment directory for managing project dependencies.
+- **`__pycache__/`**: Compiled Python files for faster execution.
+- **`.git/`**: Git version control directory for tracking changes.
+- **`.idea/`**: Configuration files for IDE support.
 
 ## Future Enhancements
 
@@ -124,12 +140,11 @@ To visualize the clean data, use **DB Browser for SQLite**:
 
 ## Contributors
 
-- **Victor Miron:** Project Lead and Developer
+- **Victor Miron**: Project Lead and Developer
 
 ## Tableau Visualization
 
-Visualize the processed data in Tableau by visiting the following link
-( I advise using Chrome or Firefox for a better experience):
+Visualize the processed data in Tableau by visiting the following link (I advise using Chrome or Firefox for a better experience):
 
 [View on Tableau](https://public.tableau.com/app/profile/victor.miron/viz/HowHigh/Story1?publish=yes)
 
