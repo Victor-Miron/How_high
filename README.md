@@ -1,9 +1,17 @@
-
 # How High Project
 
 ## Project Description
 
 The **How High Project** focuses on analyzing and processing datasets related to F1 drivers and constructor teams. The project aims to provide insights into the performance metrics of F1 entities and to visualize the data using tools like Tableau.
+
+## Future Enhancements
+
+- Set up a local database and read data in with SQLite.
+- Clean data and perform a SQL join with data sets using plain SQL.
+- Develop a user-friendly interface for data interaction through Tableau.
+- Utilize a virtual environment and include instructions in the README.md  file on how to set one up.
+- Annotate .py files with well-written comments and a clear README.md.
+
 
 ## Prerequisites
 
@@ -63,7 +71,7 @@ To set up this project, follow these steps:
    - Run the main script:
 
      ```sh
-     python Greatest.py
+     python Create_Greatest.py
      ```
 
    This will execute all necessary steps to process the data and create the database `Greatest.db`.
@@ -84,6 +92,12 @@ To visualize the clean data, use **DB Browser for SQLite**:
      - Constructor Data
      - Drivers Data
 
+## Tableau Visualization
+
+Visualize the processed data in Tableau by visiting the following link (I advise using Chrome or Firefox for a better experience):
+
+[View on Tableau](https://public.tableau.com/app/profile/victor.miron/viz/HowHigh/Story1?publish=yes)
+
 ### Running the Data Handling Demo
 
 1. **Launch Jupyter Notebook from Your IDE:**
@@ -98,7 +112,7 @@ To visualize the clean data, use **DB Browser for SQLite**:
 
 2. **Open the Notebook:**
 
-   - In the Jupyter Notebook interface, navigate to the project directory and open `Data_handling_demo_in_python.ipynb`.
+   - In the Jupyter Notebook interface, navigate to the project directory and open `Data_handling_demo.ipynb`.
 
 3. **Run the Notebook:**
 
@@ -110,19 +124,15 @@ For reviewers who want more information about the code, each Python script in th
 
 1. **Raw_Database.py**: Initializes the database structure required for storing F1 data.
 
-2. **Create_Drivers_data_table.py**: Creates and cleans the drivers data table. This is one method for handling driver data.
+2. **Drivers_data.py**: Creates and cleans the drivers data table using join.
 
-3. **Drivers_Data_Using_Join_method.py**: An alternative, faster method for creating and cleaning the drivers data table using joins.
+3. **Constructor_Data.py**: Creates and cleans the constructor data table using join.
 
-4. **Create_Constructor_data_table.py**: Creates and cleans the constructor data table. This is one method for handling constructor data.
+4. **Convert_Drivers_data_to_sql.py**: Transforms and loads driver data into the SQL database for further analysis.
 
-5. **Constructors_Data_Using_Join_method.py**: An alternative, faster method for creating and cleaning the constructor data table using joins.
+5. **Convert_Constructor_data_to_sql.py**: Transforms and loads constructor data into the SQL database for further analysis.
 
-6. **Convert_Drivers_data_to_sql.py**: Transforms and loads driver data into the SQL database for further analysis.
-
-7. **Convert_Constructor_data_to_sql.py**: Transforms and loads constructor data into the SQL database for further analysis.
-
-8. **Data_handling_demo_in_python.py**: Demonstrates data manipulation techniques in Python. Also available as a Jupyter Notebook for interactive exploration.
+6. **Data_handling_demo.ipynb**: Demonstrates data manipulation techniques in Python. Also, available as a Jupyter Notebook for interactive exploration.
 
 ## Directory Structure
 
@@ -132,21 +142,9 @@ For reviewers who want more information about the code, each Python script in th
 - **`.git/`**: Git version control directory for tracking changes.
 - **`.idea/`**: Configuration files for IDE support.
 
-## Future Enhancements
-
-- Implement advanced analytics for driver and constructor performance predictions.
-- Integrate additional data sources for enriched analysis.
-- Develop a user-friendly web interface for data interaction through Tableau.
-
 ## Contributors
 
 - **Victor Miron**: Project Lead and Developer
-
-## Tableau Visualization
-
-Visualize the processed data in Tableau by visiting the following link (I advise using Chrome or Firefox for a better experience):
-
-[View on Tableau](https://public.tableau.com/app/profile/victor.miron/viz/HowHigh/Story1?publish=yes)
 
 ---
 

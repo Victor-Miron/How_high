@@ -2,7 +2,7 @@ import sqlite3
 import matplotlib.pyplot as plt
 
 # Connect to sql database
-conn = sqlite3.connect('Greatest.db')
+conn = sqlite3.connect('../Greatest.db')
 cur = conn.cursor()
 
 # Fetch data for the first two teams with maximum wins
