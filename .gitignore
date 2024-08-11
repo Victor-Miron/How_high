@@ -1,0 +1,18 @@
+# Virtual environment directories
+myvenv/
+env/
+venv/
+
+# IDE settings
+.idea/
+
+# macOS-specific files
+.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python compiled files
+__pycache__/
+*.pyc
+
