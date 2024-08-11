@@ -40,7 +40,7 @@ To set up this project, follow these steps:
 3. **Create and Activate a Virtual Environment:**
 
    ```sh
-   python -m venv myvenv
+   python -m venv myvenv #python3 -m venv myvenv on linux
    source myvenv/bin/activate   # On Windows, use `myvenv\Scripts\activate`
    ```
 
@@ -102,7 +102,6 @@ Visualize the processed data in Tableau by visiting the following link (I advise
 
 1. **Launch Jupyter Notebook from Your IDE:**
 
-   - In VS Code, use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and select `Python: Create New Blank Notebook`.
    - Open the terminal within your IDE (`View` > `Terminal` in VS Code).
    - Run Jupyter Notebook:
 
@@ -137,10 +136,7 @@ For reviewers who want more information about the code, each Python script in th
 ## Directory Structure
 
 - **`archive/`**: Contains archived datasets and backup files.
-- **`myvenv/`**: The virtual environment directory for managing project dependencies.
-- **`__pycache__/`**: Compiled Python files for faster execution.
-- **`.git/`**: Git version control directory for tracking changes.
-- **`.idea/`**: Configuration files for IDE support.
+- **`.gitignore/`**: Used to specify files and directories that should not be tracked by Git. This is important to keep the repository clean and avoid committing files that are not necessary for others to run the project.
 
 ## Contributors
 
