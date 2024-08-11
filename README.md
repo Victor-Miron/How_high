@@ -25,7 +25,7 @@ To set up this project, follow these steps:
 
 1. **Clone the Repository:**
 
-   Open your IDE terminal and run:
+   Open your terminal or IDE terminal and run:
 
    ```sh
    git clone git@github.com:Victor-Miron/How_high.git
@@ -71,7 +71,7 @@ To set up this project, follow these steps:
    - Run the main script:
 
      ```sh
-     python Create_Greatest.py
+     python Create_Greatest.py # python3 Create_Greatest.py on linux
      ```
 
    This will execute all necessary steps to process the data and create the database `Greatest.db`.
